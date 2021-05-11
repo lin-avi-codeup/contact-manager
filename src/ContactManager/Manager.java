@@ -14,6 +14,7 @@ public class Manager {
     // TODO: Search a contact by her name
     // TODO: Delete an existing contact
 
+
     public static void printContacts(Path filePath) throws IOException {
 
         System.out.println();
