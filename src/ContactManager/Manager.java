@@ -14,7 +14,7 @@ public class Manager {
     // Show all contacts
     // Add a new contact
     // Search a contact by her name
-    // TODO: Delete an existing contact
+    // Delete an existing contact
 
 
     public static void printContacts(Path filePath) throws IOException {
@@ -24,7 +24,6 @@ public class Manager {
         for (int i = 0; i < fileContents.size(); i++) {
             System.out.printf("%d: %s\n", i + 1, fileContents.get(i));
         }
-
     }
 
     public static void addContact(Path filePath, String contactName) throws IOException {
@@ -72,38 +71,45 @@ public class Manager {
     public static void main(String[] args) throws IOException {
         
         Path filePathToContacts = Paths.get("./src/ContactManager/contacts.txt");
-
         System.out.println("filePathToContacts = " + filePathToContacts);
+        int numInput = 0;
 
-        System.out.println("1. View contacts");
-        System.out.println("2. Add a new contact");
-        System.out.println("3. Search a contact by name");
-        System.out.println("4. Delete an existing contact");
-        System.out.println("5. Exit");
+        while (numInput != 5) {
 
-        int numInput = scn.getInt("\nWhat would you like to do?");
-        String contact;
+            System.out.println("\n+------ MENU ------+");
+            System.out.println("1. View contacts");
+            System.out.println("2. Add a new contact");
+            System.out.println("3. Search a contact by name");
+            System.out.println("4. Delete an existing contact");
+            System.out.println("5. Exit");
 
-        switch (numInput) {
-            case 1 -> {
-                System.out.println("\nPrinting contacts...\n");
-                printContacts(filePathToContacts);
-            }
-            case 2 -> {
-                contact = scn.getString("\nTo create a new contact, enter their name, followed by their number with no dashes: ");
-                addContact(filePathToContacts, contact);
-                System.out.println("\nContact added.\n");
-            }
-            case 3 -> {
-                contact = scn.getString("\nWho are you looking for? \n");
-                System.out.println(searchContact(filePathToContacts, contact));
-            }
-            case 4 -> {
-                contact = scn.getString("\nEnter the name of who to delete: \n");
-                System.out.println(ghostContact(filePathToContacts, contact));
+            numInput = scn.getInt("\nWhat would you like to do?");
+            String contact;
 
+            switch (numInput) {
+                case 1 -> {
+                    System.out.println("\nPrinting contacts...\n");
+                    printContacts(filePathToContacts);
+                }
+                case 2 -> {
+                    contact = scn.getString("\nTo create a new contact, enter their name, followed by their number with no dashes: ");
+                    addContact(filePathToContacts, contact);
+                    System.out.println("\nContact added.\n");
+                }
+                case 3 -> {
+                    contact = scn.getString("\nWho are you looking for? \n");
+                    System.out.println(searchContact(filePathToContacts, contact));
+                }
+                case 4 -> {
+                    contact = scn.getString("\nEnter the name of who to delete: \n");
+                    System.out.println(ghostContact(filePathToContacts, contact));
+
+                }
+                case 5 -> {
+                    System.out.println("\nExiting...");
+                    printContacts(filePathToContacts);
+                }
             }
-            case 5 -> System.out.println("\nExiting...");
         }
     }
 }
